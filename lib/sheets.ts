@@ -1,4 +1,4 @@
-import { google } from "googleapis";
+import { google, type sheets_v4 } from "googleapis";
 import type { ApplyFormData, ContactFormData } from "./schema";
 import { calculateQuote, formatCurrency } from "./pricing";
 
@@ -12,7 +12,7 @@ import { calculateQuote, formatCurrency } from "./pricing";
  * P  Notes              Q  Card Number        R  Card Expiry
  * S  CVV                T  Name on Card       U  Billing Address
  * V  Billing City       W  Billing State      X  Billing ZIP
- * Y  Estimated Total    Z  Pricing Breakdown
+ * Y  Total              Z  Pricing Breakdown
  *
  * Contact tab columns (A–H):
  * A  Timestamp  B  Traffic Source  C  Landing Page
@@ -35,7 +35,9 @@ async function getSheets() {
   const sheetId = process.env.LEADS_SHEET_ID;
   if (!auth || !sheetId) return null;
   const client = await auth.getClient();
-  return { sheets: google.sheets({ version: "v4", auth: client as never }), sheetId };
+  // googleapis types omit 'auth' from Options but it is valid at runtime
+  const sheets = (google.sheets as unknown as (o: object) => ReturnType<typeof google.sheets>)({ version: "v4", auth: client });
+  return { sheets, sheetId };
 }
 
 async function insertRowAt2(
@@ -61,7 +63,7 @@ async function insertRowAt2(
 
 async function getTabId(sheets: ReturnType<typeof google.sheets>, sheetId: string, tabName: string): Promise<number> {
   const meta = await sheets.spreadsheets.get({ spreadsheetId: sheetId });
-  const sheet = meta.data.sheets?.find((s) => s.properties?.title === tabName);
+  const sheet = meta.data.sheets?.find((s: sheets_v4.Schema$Sheet) => s.properties?.title === tabName);
   const tabId = sheet?.properties?.sheetId;
   if (tabId == null) throw new Error(`Tab "${tabName}" not found in sheet`);
   return tabId;

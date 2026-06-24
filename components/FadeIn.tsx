@@ -23,6 +23,7 @@ export default function FadeIn({
 
   return (
     <motion.div
+      // @ts-expect-error -- framer-motion v12 + React 19 omit animation props from HTMLMotionProps; valid at runtime
       initial={initial}
       whileInView={{ opacity: 1, y: 0, x: 0 }}
       viewport={{ once: true, margin: "-60px" }}

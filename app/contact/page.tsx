@@ -39,7 +39,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="font-semibold text-navy text-sm">Phone</p>
-                      <a href="tel:+18660000000" className="text-teal text-sm font-medium hover:underline">(866) 000-0000</a>
+                      <a href="tel:+18666187149" className="text-teal text-sm font-medium hover:underline">(866) 618-7149</a>
                       <p className="text-xs text-muted mt-0.5">Mon – Fri, 9am – 6pm ET</p>
                     </div>
                   </div>

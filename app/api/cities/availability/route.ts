@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const client = await auth.getClient();
-    const sheets = google.sheets({ version: "v4", auth: client as never });
+    const sheets = (google.sheets as unknown as (o: object) => ReturnType<typeof google.sheets>)({ version: "v4", auth: client });
     const res = await sheets.spreadsheets.values.get({
       spreadsheetId: sheetId,
       range: "Featured-Placement-City!A:E",

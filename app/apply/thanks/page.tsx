@@ -20,7 +20,7 @@ export default function ThanksPage() {
           </h1>
           <p className="text-muted text-lg leading-relaxed mb-8">
             Thank you for applying to TopParalegals.com. If we need anything to finalize your listing, we&apos;ll reach out. In the meantime, call us anytime at{" "}
-            <a href="tel:+18660000000" className="text-teal font-semibold hover:underline">(866) 000-0000</a>.
+            <a href="tel:+18666187149" className="text-teal font-semibold hover:underline">(866) 618-7149</a>.
           </p>
           <div className="rounded-xl border border-navy/10 bg-navy/5 p-6 text-left mb-8">
             <div className="flex items-center gap-3 mb-4">

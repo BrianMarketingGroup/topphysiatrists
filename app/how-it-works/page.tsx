@@ -34,7 +34,7 @@ const steps = [
     num: "04",
     title: "Be Recognized",
     description:
-      "Display the TopParalegals.com 2027 verified badge on your website and receive your invitation to the Annual Awards & Recognition Event in Summer 2027.",
+      "Display the TopParalegals.com 2027 verified badge on your website and receive your complimentary recognition plaque and invitation to the Annual Awards & Recognition Event in Summer 2027.",
   },
 ];
 
@@ -80,8 +80,8 @@ export default function HowItWorksPage() {
               </Button>
               <span className="text-muted text-sm">
                 Questions? Call{" "}
-                <a href="tel:+18660000000" className="text-teal font-semibold hover:underline">
-                  (866) 000-0000
+                <a href="tel:+18666187149" className="text-teal font-semibold hover:underline">
+                  (866) 618-7149
                 </a>
               </span>
             </div>
@@ -109,7 +109,7 @@ export default function HowItWorksPage() {
                       "Full professional profile with photo & description",
                       "Custom recognition plaque",
                       "Invitation to the Awards & Recognition Event",
-                      "Eligibility for the TopParalegals.com Recognition Award",
+                      "TopParalegals.com verified badge for your website",
                       "Full listing in every city you serve",
                       "Expands your reach to all law firms and clients in your market",
                     ].map((f) => (
@@ -156,11 +156,11 @@ export default function HowItWorksPage() {
                   Submit Your Profile
                 </Button>
                 <a
-                  href="tel:+18660000000"
+                  href="tel:+18666187149"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-navy hover:text-teal transition-colors"
                 >
                   <Phone className="h-4 w-4" />
-                  (866) 000-0000
+                  (866) 618-7149
                 </a>
               </div>
             </div>

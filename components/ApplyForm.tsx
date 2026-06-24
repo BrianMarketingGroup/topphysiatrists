@@ -26,7 +26,7 @@ const US_STATES = [
   ["DC","District of Columbia"],
 ] as const;
 
-const STEP_TITLES = ["Business Details", "Contact Info", "Legal Specialties & Cities", "Billing"];
+const STEP_TITLES = ["Business Details", "Contact Info", "Cities & Specialties", "Billing"];
 
 const formatPhone = (val: string) => {
   const d = val.replace(/\D/g, "");
@@ -158,7 +158,7 @@ export default function ApplyForm() {
         <h2 className="font-display text-2xl font-bold text-navy">Application Received!</h2>
         <p className="text-muted text-sm max-w-md mx-auto leading-relaxed">
           We&apos;ll reach out if we need anything to finalize your listing. Questions? Call us at:{" "}
-          <a href="tel:+18660000000" className="text-teal font-semibold hover:text-teal-dark">(866) 000-0000</a>
+          <a href="tel:+18666187149" className="text-teal font-semibold hover:text-teal-dark">(866) 618-7149</a>
         </p>
       </div>
     );
@@ -304,17 +304,11 @@ export default function ApplyForm() {
           {step === 3 && (
             <div className="space-y-8">
               <div>
-                <h2 className="font-display text-xl font-bold text-navy mb-1">Specialties & Cities</h2>
+                <h2 className="font-display text-xl font-bold text-navy mb-1">Cities & Specialties</h2>
                 <p className="text-sm text-muted">Select your service cities, legal support specialties, and listing type.</p>
               </div>
 
               <div>
-                <div className="flex items-center justify-between mb-3">
-                  <p className="text-sm font-semibold text-navy">Cities <span className="text-red-500">*</span></p>
-                  <button type="button" onClick={() => addLocation({ city: "", state: "" })} className="inline-flex items-center gap-1 text-xs font-medium text-teal hover:text-teal-dark transition-colors">
-                    <Plus className="h-3 w-3" /> Add City
-                  </button>
-                </div>
                 <div className="space-y-3">
                   {locFields.map((field, i) => {
                     const stateVal = watch(`locations.${i}.state`) ?? "";
@@ -350,6 +344,9 @@ export default function ApplyForm() {
                     );
                   })}
                 </div>
+                <button type="button" onClick={() => addLocation({ city: "", state: "" })} className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-teal hover:text-teal-dark transition-colors">
+                  <Plus className="h-3 w-3" /> Add City
+                </button>
               </div>
 
               <div>
