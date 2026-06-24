@@ -13,19 +13,19 @@ export default function AwardsDinner() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left: plaque */}
           <FadeIn direction="left">
-            <div className="flex justify-center lg:justify-start">
-              <div className="relative">
-                <div className="absolute -inset-6 bg-teal/10 rounded-3xl blur-2xl" />
-                <div className="relative w-full max-w-lg">
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10 inline-flex items-center gap-2 justify-center px-4 py-1.5 bg-teal text-white font-bold text-[10px] tracking-widest uppercase rounded-full shadow-md whitespace-nowrap">
-                    Limited Time: Apply Today
-                  </div>
+            <div className="relative w-full">
+              <div className="absolute -inset-6 bg-teal/10 rounded-3xl blur-2xl" />
+              <div className="relative w-full">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10 inline-flex items-center gap-2 justify-center px-4 py-1.5 bg-teal text-white font-bold text-[10px] tracking-widest uppercase rounded-full shadow-md whitespace-nowrap">
+                  Limited Time: Apply Today
+                </div>
+                <div className="relative w-full aspect-square overflow-hidden rounded-2xl shadow-2xl">
                   <Image
-                    src="/plaque.jpeg"
+                    src="/award.png"
                     alt="TopParalegals.com 2027 Recognition Award Plaque"
-                    width={600}
-                    height={720}
-                    className="rounded-2xl shadow-2xl w-full h-auto"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 </div>
               </div>
