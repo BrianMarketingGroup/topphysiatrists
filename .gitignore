@@ -4,3 +4,4 @@ node_modules/
 .pnpm-store/
 .gcloud-env.yaml
 tsconfig.tsbuildinfo
+*.pdf

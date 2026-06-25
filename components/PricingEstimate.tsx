@@ -101,8 +101,8 @@ export default function PricingEstimate({
           {hasTaken && (
             <p className="text-xs text-red-600 mt-1">
               Featured is already claimed in some cities.{" "}
-              <a href="tel:+18666187149" className="font-medium underline hover:text-red-700">
-                Call us at (866) 618-7149
+              <a href="tel:+1XXXXXXXXXX" className="font-medium underline hover:text-red-700">
+                Call us at (XXX) XXX-XXXX
               </a>{" "}
               to discuss your options.
             </p>

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Scale } from "lucide-react";
+import { Stethoscope } from "lucide-react";
 import Button from "./Button";
 import Container from "./Container";
 import FadeIn from "./FadeIn";
@@ -27,29 +27,29 @@ export default function Hero() {
           {/* Left: headline */}
           <FadeIn direction="left">
             <div className="inline-flex items-center gap-2 rounded-full border border-teal/40 bg-teal/10 px-4 py-1.5 mb-6">
-              <Scale className="h-3.5 w-3.5 text-teal" />
+              <Stethoscope className="h-3.5 w-3.5 text-teal" />
               <span className="text-xs font-semibold text-teal uppercase tracking-widest">
                 Applications Open — 2026/2027 Listings
               </span>
             </div>
 
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-6">
-              Get Your Services
+              Get Your Practice
               <br />
               <span className="text-teal">In Front of</span>
               <br />
-              More Clients.
+              More Patients.
             </h1>
 
             <p className="text-lg text-white/70 max-w-xl mb-8 leading-relaxed">
-              TopParalegals.com is the premier directory connecting
-              law firms, attorneys, businesses, and individuals with qualified paralegal and legal support
-              services across the country.
+              TopPhysiatrists.com is the premier directory connecting
+              patients, referring physicians, and healthcare organizations with top-rated
+              physiatrists and physical medicine &amp; rehabilitation specialists across the country.
             </p>
 
             <div className="flex flex-wrap gap-4">
               <Button href="/apply" variant="primary" size="lg">
-                Get Your Services Listed
+                Get Your Practice Listed
               </Button>
               <Button href="/how-it-works" variant="outline-light" size="lg">
                 Learn More
@@ -67,7 +67,7 @@ export default function Hero() {
                   <div className="relative h-[480px] w-full">
                     <Image
                       src={IMAGES.heroPortrait}
-                      alt="Top-rated paralegal professional"
+                      alt="Top-rated physiatrist"
                       fill
                       className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                       priority
@@ -77,7 +77,7 @@ export default function Hero() {
 
                   <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
                     <p className="text-sm text-white/70 leading-relaxed max-w-sm">
-                      Build credibility with a professional profile that highlights your legal support specialties, experience, and practice area expertise.
+                      Build credibility with a professional profile that highlights your PM&amp;R specialties, experience, and the conditions you treat.
                     </p>
                   </div>
                 </div>

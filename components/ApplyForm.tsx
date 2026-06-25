@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus, Trash2, Scale, ChevronRight, ChevronLeft } from "lucide-react";
+import { Plus, Trash2, Stethoscope, ChevronRight, ChevronLeft } from "lucide-react";
 import { applySchema, type ApplyFormData } from "@/lib/schema";
 import { FormField, Input, Textarea, Select } from "./FormField";
 import CityCombobox from "./CityCombobox";
@@ -153,12 +153,12 @@ export default function ApplyForm() {
     return (
       <div className="rounded-2xl border border-teal/30 bg-teal/5 p-10 text-center space-y-4">
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-teal/20">
-          <Scale className="h-8 w-8 text-teal" />
+          <Stethoscope className="h-8 w-8 text-teal" />
         </div>
         <h2 className="font-display text-2xl font-bold text-navy">Application Received!</h2>
         <p className="text-muted text-sm max-w-md mx-auto leading-relaxed">
           We&apos;ll reach out if we need anything to finalize your listing. Questions? Call us at:{" "}
-          <a href="tel:+18666187149" className="text-teal font-semibold hover:text-teal-dark">(866) 618-7149</a>
+          <a href="tel:+1XXXXXXXXXX" className="text-teal font-semibold hover:text-teal-dark">(XXX) XXX-XXXX</a>
         </p>
       </div>
     );
@@ -198,11 +198,11 @@ export default function ApplyForm() {
             <div className="space-y-6">
               <div>
                 <h2 className="font-display text-xl font-bold text-navy mb-1">Business Details</h2>
-                <p className="text-sm text-muted">Tell us about your paralegal services.</p>
+                <p className="text-sm text-muted">Tell us about your physiatry practice.</p>
               </div>
 
               <FormField label="Business Name" required error={errors.businessName?.message}>
-                <Input {...register("businessName")} error={errors.businessName?.message} placeholder="Meridian Legal Support" />
+                <Input {...register("businessName")} error={errors.businessName?.message} placeholder="Apex Physical Medicine" />
               </FormField>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -227,7 +227,7 @@ export default function ApplyForm() {
                       <div>
                         {val === "grant" ? (
                           <>
-                            <p className="font-semibold text-sm text-navy">I grant TopParalegals.com permission</p>
+                            <p className="font-semibold text-sm text-navy">I grant TopPhysiatrists.com permission</p>
                             <p className="text-xs text-muted mt-0.5">to use photos, logos, and content from my website for my directory listing.</p>
                           </>
                         ) : (
@@ -261,7 +261,7 @@ export default function ApplyForm() {
                 </FormField>
               </div>
               <FormField label="Title / Role" hint="optional" error={errors.contactTitle?.message}>
-                <Input {...register("contactTitle")} error={errors.contactTitle?.message} placeholder="Owner, Senior Paralegal, Legal Support Specialist…" />
+                <Input {...register("contactTitle")} error={errors.contactTitle?.message} placeholder="Owner, Medical Director, PM&R Physician…" />
               </FormField>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <FormField label="Email Address" required error={errors.email?.message}>
@@ -305,7 +305,7 @@ export default function ApplyForm() {
             <div className="space-y-8">
               <div>
                 <h2 className="font-display text-xl font-bold text-navy mb-1">Cities & Specialties</h2>
-                <p className="text-sm text-muted">Select your service cities, legal support specialties, and listing type.</p>
+                <p className="text-sm text-muted">Select your service cities, PM&amp;R specialties, and listing type.</p>
               </div>
 
               <div>
@@ -350,8 +350,8 @@ export default function ApplyForm() {
               </div>
 
               <div>
-                <p className="text-sm font-semibold text-navy mb-1">Legal Support Specialties <span className="text-red-500">*</span></p>
-                <p className="text-xs text-muted mb-3">Select all specialties your practice supports. These appear on your listing and do not affect pricing.</p>
+                <p className="text-sm font-semibold text-navy mb-1">PM&amp;R Specialties <span className="text-red-500">*</span></p>
+                <p className="text-xs text-muted mb-3">Select all PM&amp;R specialties your practice offers. These appear on your listing and do not affect pricing.</p>
                 <ServicesSelect
                   value={watchedServices}
                   onChange={(selected) => setValue("services", selected, { shouldValidate: true })}

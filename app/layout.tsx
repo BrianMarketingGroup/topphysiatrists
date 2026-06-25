@@ -21,20 +21,20 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "TopParalegals.com — Get Your Paralegal Services Listed",
-    template: "%s | TopParalegals.com",
+    default: "TopPhysiatrists.com — Get Your Practice Listed",
+    template: "%s | TopPhysiatrists.com",
   },
   description:
-    "The premier directory of top paralegal services nationwide. Get your services listed and reach law firms, attorneys, businesses, and individuals actively searching for qualified legal support.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://topparalegals.com"),
+    "The premier directory of top physiatrists and physical medicine & rehabilitation specialists nationwide. Get your practice listed and connect with patients actively searching for PM&R care.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://topphysiatrists.com"),
   icons: {
-    icon: "/scales.svg",
-    shortcut: "/scales.svg",
-    apple: "/scales.svg",
+    icon: "/stethoscope.svg",
+    shortcut: "/stethoscope.svg",
+    apple: "/stethoscope.svg",
   },
   openGraph: {
     type: "website",
-    siteName: "TopParalegals.com",
+    siteName: "TopPhysiatrists.com",
   },
 };
 

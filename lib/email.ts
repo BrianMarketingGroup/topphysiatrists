@@ -2,8 +2,8 @@ import sgMail from "@sendgrid/mail";
 import type { ApplyFormData, ContactFormData } from "./schema";
 import { calculateQuote, formatCurrency } from "./pricing";
 
-const FROM_EMAIL = "info@topparalegals.com";
-const FROM_NAME = "TopParalegals.com";
+const FROM_EMAIL = "info@topphysiatrists.com";
+const FROM_NAME = "TopPhysiatrists.com";
 const REPLY_TO = "abansal@brianmarketinggroup.com";
 const TEST_EMAIL = "abansal@brianmarketinggroup.com";
 const NOTIFICATION_EMAILS = [
@@ -70,7 +70,7 @@ export async function sendLeadEmail(
   const divider = "─".repeat(52);
 
   const text = `
-New listing application received on TopParalegals.com
+New listing application received on TopPhysiatrists.com
 
 SOURCE
 Traffic Source:  ${meta.referer || "direct"}
@@ -84,7 +84,7 @@ Phone:         ${data.businessPhone}
 Cities:        ${data.locations.map((l) => `${l.city}, ${l.state}`).join(" | ")}
 Assets:        ${data.assetPermission === "grant" ? "Permission granted to use website assets" : "Support team to contact for assets"}
 
-LEGAL SUPPORT SPECIALTIES
+PM&R SPECIALTIES
 ${data.services.map((p) => `  • ${p}`).join("\n")}
 Featured Placement: ${data.featuredPlacement ? "Yes" : "No"}
 
@@ -143,7 +143,7 @@ export async function sendContactEmail(
   init();
 
   const text = `
-New contact inquiry from TopParalegals.com
+New contact inquiry from TopPhysiatrists.com
 
 SOURCE
 Traffic Source:  ${meta.referer || "direct"}

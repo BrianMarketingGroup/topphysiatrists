@@ -22,7 +22,7 @@ export default function AwardsDinner() {
                 <div className="relative w-full aspect-square overflow-hidden rounded-2xl shadow-2xl">
                   <Image
                     src="/award.png"
-                    alt="TopParalegals.com 2027 Recognition Award Plaque"
+                    alt="TopPhysiatrists.com 2027 Recognition Award Plaque"
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -45,10 +45,10 @@ export default function AwardsDinner() {
             </h2>
 
             <p className="text-white/70 text-lg leading-relaxed mb-8">
-              Every listed professional receives a custom recognition plaque and an
+              Every listed physician receives a custom recognition plaque and an
               invitation to the Annual Awards &amp; Recognition Event in Summer
               2027 — a night of peer recognition, networking, and celebration of
-              every listed professional on TopParalegals.com.
+              every listed professional on TopPhysiatrists.com.
             </p>
 
             <div className="space-y-4 mb-10">
@@ -63,7 +63,7 @@ export default function AwardsDinner() {
                 },
                 {
                   icon: Users,
-                  text: "Network with peers, law firms, and legal industry leaders",
+                  text: "Network with peers, patients, and medical industry leaders",
                 },
               ].map(({ icon: Icon, text }) => (
                 <div key={text} className="flex items-start gap-3">
@@ -80,11 +80,11 @@ export default function AwardsDinner() {
                 Learn More
               </Button>
               <a
-                href="tel:+18666187149"
+                href="tel:+1XXXXXXXXXX"
                 className="inline-flex items-center gap-2.5 rounded-lg border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white/80 hover:text-teal hover:border-teal/50 hover:bg-teal/10 transition-colors"
               >
                 <Phone className="h-4 w-4 text-teal" />
-                (866) 618-7149
+                (XXX) XXX-XXXX
               </a>
             </div>
           </FadeIn>

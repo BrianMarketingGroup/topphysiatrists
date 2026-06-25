@@ -8,7 +8,7 @@ import { howItWorksFaqItems } from "@/content/faq";
 
 export const metadata: Metadata = {
   title: "How It Works",
-  description: "Learn how TopParalegals.com works — apply, get listed, and connect with law firms and clients in your city.",
+  description: "Learn how TopPhysiatrists.com works — apply, get listed, and connect with patients and referring physicians in your city.",
 };
 
 const steps = [
@@ -16,25 +16,25 @@ const steps = [
     num: "01",
     title: "Tell Us About Your Practice",
     description:
-      "Tell us about your paralegal services, the specialties you offer, and the cities you serve. The profile submission takes about 5 minutes and includes a transparent pricing estimate.",
+      "Tell us about your physiatry practice, the PM&R specialties you offer, and the cities you serve. The profile submission takes about 5 minutes and includes a transparent pricing estimate.",
   },
   {
     num: "02",
     title: "Get Reviewed",
     description:
-      "Our team verifies your credentials and confirms your application details. Every qualifying paralegal professional is accepted. If we need anything to finalize your listing, we'll reach out directly.",
+      "Our team verifies your credentials and confirms your application details. Every qualifying physiatrist and PM&R specialist is accepted. If we need anything to finalize your listing, we'll reach out directly.",
   },
   {
     num: "03",
     title: "Go Live",
     description:
-      "Your listing debuts in August 2026 alongside all listed professionals — a coordinated national launch with attorney and client awareness campaigns.",
+      "Your listing debuts in August 2026 alongside all listed physicians — a coordinated national launch with patient and referring physician awareness campaigns.",
   },
   {
     num: "04",
     title: "Be Recognized",
     description:
-      "Display the TopParalegals.com 2027 verified badge on your website and receive your complimentary recognition plaque and invitation to the Annual Awards & Recognition Event in Summer 2027.",
+      "Display the TopPhysiatrists.com 2027 verified badge on your website and receive your complimentary recognition plaque and invitation to the Annual Awards & Recognition Event in Summer 2027.",
   },
 ];
 
@@ -80,8 +80,8 @@ export default function HowItWorksPage() {
               </Button>
               <span className="text-muted text-sm">
                 Questions? Call{" "}
-                <a href="tel:+18666187149" className="text-teal font-semibold hover:underline">
-                  (866) 618-7149
+                <a href="tel:+1XXXXXXXXXX" className="text-teal font-semibold hover:underline">
+                  (XXX) XXX-XXXX
                 </a>
               </span>
             </div>
@@ -106,12 +106,12 @@ export default function HowItWorksPage() {
                   </div>
                   <ul className="space-y-1.5">
                     {[
-                      "Full professional profile with photo & description",
+                      "Full physician profile with photo & description",
                       "Custom recognition plaque",
                       "Invitation to the Awards & Recognition Event",
-                      "TopParalegals.com verified badge for your website",
+                      "TopPhysiatrists.com verified badge for your website",
                       "Full listing in every city you serve",
-                      "Expands your reach to all law firms and clients in your market",
+                      "Expands your reach to patients and referring physicians in your market",
                     ].map((f) => (
                       <li key={f} className="flex items-start gap-2 text-sm text-muted">
                         <span className="text-teal font-bold mt-0.5">✓</span>
@@ -156,11 +156,11 @@ export default function HowItWorksPage() {
                   Submit Your Profile
                 </Button>
                 <a
-                  href="tel:+18666187149"
+                  href="tel:+1XXXXXXXXXX"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-navy hover:text-teal transition-colors"
                 >
                   <Phone className="h-4 w-4" />
-                  (866) 618-7149
+                  (XXX) XXX-XXXX
                 </a>
               </div>
             </div>
