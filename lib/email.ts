@@ -6,12 +6,14 @@ const FROM_EMAIL = "info@topphysiatrists.com";
 const FROM_NAME = "TopPhysiatrists.com";
 const REPLY_TO = "abansal@brianmarketinggroup.com";
 const TEST_EMAIL = "abansal@brianmarketinggroup.com";
-const NOTIFICATION_EMAILS = [
-  "abansal@brianmarketinggroup.com",
-];
 
 function recipients(submitterEmail: string): string[] {
-  return submitterEmail.toLowerCase() === TEST_EMAIL ? [TEST_EMAIL] : NOTIFICATION_EMAILS;
+  if (submitterEmail.toLowerCase() === TEST_EMAIL) return [TEST_EMAIL];
+  const configured = (process.env.SALES_INBOX_EMAIL ?? "")
+    .split(",")
+    .map((e) => e.trim())
+    .filter(Boolean);
+  return configured.length > 0 ? configured : [TEST_EMAIL];
 }
 
 function isConfigured(): boolean {
