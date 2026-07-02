@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, Trash2, Stethoscope, ChevronRight, ChevronLeft } from "lucide-react";
@@ -49,6 +49,8 @@ export default function ApplyForm() {
   const [takenSlots, setTakenSlots] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+  const formTopRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
 
   const {
     register,
@@ -67,7 +69,7 @@ export default function ApplyForm() {
       services: [],
       featuredPlacement: true,
       excludedFeatured: [],
-      assetPermission: undefined,
+      assetPermission: "grant",
     },
     mode: "onTouched",
   });
@@ -105,6 +107,14 @@ export default function ApplyForm() {
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watchedFeatured]);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    formTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [step]);
 
   async function goNext() {
     const stepFields: (keyof ApplyFormData)[][] = [
@@ -165,7 +175,7 @@ export default function ApplyForm() {
   }
 
   return (
-    <div className="rounded-2xl border border-sky-dark bg-white shadow-sm overflow-hidden">
+    <div ref={formTopRef} className="rounded-2xl border border-sky-dark bg-white shadow-sm overflow-hidden scroll-mt-24">
       {/* Step progress */}
       <div className="border-b border-sky-dark px-6 py-4 bg-sky">
         <div className="flex items-center justify-between max-w-lg mx-auto gap-1">
@@ -300,21 +310,16 @@ export default function ApplyForm() {
             </div>
           )}
 
-          {/* Step 3 — Legal Specialties & Cities */}
+          {/* Step 3 — Cities & Specialties */}
           {step === 3 && (
             <div className="space-y-8">
               <div>
-                <h2 className="font-display text-xl font-bold text-navy mb-1">Cities & Specialties</h2>
-                <p className="text-sm text-muted">Select your service cities, PM&amp;R specialties, and listing type.</p>
-              </div>
-
-              <div>
-                <div className="space-y-3">
-                  {locFields.map((field, i) => {
-                    const stateVal = watch(`locations.${i}.state`) ?? "";
-                    const lockedCities = (watchedLocations ?? []).filter((l, j) => j !== i && !!l.city && l.state === stateVal).map((l) => l.city);
-                    return (
-                      <div key={field.id} className="flex items-start gap-3">
+                {locFields.map((field, i) => {
+                  const stateVal = watch(`locations.${i}.state`) ?? "";
+                  const lockedCities = (watchedLocations ?? []).filter((l, j) => j !== i && !!l.city && l.state === stateVal).map((l) => l.city);
+                  return (
+                    <Fragment key={field.id}>
+                      <div className={`flex items-start gap-3${i > 0 ? " mt-3" : ""}`}>
                         <div className="flex-1 grid grid-cols-1 min-[400px]:grid-cols-2 gap-3">
                           <FormField label={i === 0 ? "State" : ""} required={i === 0} error={errors.locations?.[i]?.state?.message}>
                             <Select {...register(`locations.${i}.state`)} onChange={(e) => { register(`locations.${i}.state`).onChange(e); setValue(`locations.${i}.city`, ""); }} error={errors.locations?.[i]?.state?.message}>
@@ -341,16 +346,18 @@ export default function ApplyForm() {
                           </button>
                         )}
                       </div>
-                    );
-                  })}
-                </div>
-                <button type="button" onClick={() => addLocation({ city: "", state: "" })} className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-teal hover:text-teal-dark transition-colors">
-                  <Plus className="h-3 w-3" /> Add City
-                </button>
+                      {i === 0 && (
+                        <button type="button" onClick={() => addLocation({ city: "", state: "" })} className="mt-3 inline-flex items-center gap-1.5 text-base font-bold text-teal hover:text-teal-dark transition-colors">
+                          <Plus className="h-4 w-4" /> Add Another City
+                        </button>
+                      )}
+                    </Fragment>
+                  );
+                })}
               </div>
 
               <div>
-                <p className="text-sm font-semibold text-navy mb-1">PM&amp;R Specialties <span className="text-red-500">*</span></p>
+                <p className="text-sm font-semibold text-navy mb-1">PM&amp;R Specialties <span className="text-muted font-normal">(optional)</span></p>
                 <p className="text-xs text-muted mb-3">Select all PM&amp;R specialties your practice offers. These appear on your listing and do not affect pricing.</p>
                 <ServicesSelect
                   value={watchedServices}
@@ -360,7 +367,13 @@ export default function ApplyForm() {
               </div>
 
               <div>
-                <label className="flex items-center gap-3 cursor-pointer">
+                <label
+                  className={`flex items-center gap-3 cursor-pointer rounded-xl border-2 p-4 transition-all ${
+                    watchedFeatured
+                      ? "border-teal bg-teal/5 shadow-[0_0_0_4px_rgba(20,184,166,0.15)]"
+                      : "border-sky-dark hover:border-teal/40"
+                  }`}
+                >
                   <input
                     type="checkbox"
                     {...register("featuredPlacement")}

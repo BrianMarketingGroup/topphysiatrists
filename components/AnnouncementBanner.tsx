@@ -15,10 +15,10 @@ export default function AnnouncementBanner() {
               </div>
               <div>
                 <p className="font-display text-lg font-bold text-white leading-snug">
-                  Pre-Launch Special — Balance of 2026 + All of 2027
+                  Pre-Launch Special — 50% Off All Listings
                 </p>
                 <p className="text-white/80 text-sm mt-0.5">
-                  Apply before August 2026 to lock in extended coverage at no extra cost.
+                  Apply before our August 2026 launch to lock in half off your listing rate.
                 </p>
               </div>
             </div>

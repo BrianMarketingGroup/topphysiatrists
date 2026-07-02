@@ -18,7 +18,7 @@ export default function TermsPage() {
           <p>You must be a board-eligible or board-certified physiatrist, PM&R specialist, or physical medicine and rehabilitation practice in good standing. By applying, you represent that this is true and that all information provided is accurate.</p>
 
           <h2>3. Listing Term and Fees</h2>
-          <p>All listings are annual. The pre-launch listing fee covers the balance of 2026 (from the August 2026 launch through December 31, 2026) plus all of 2027. Fees are non-refundable once your listing is confirmed. Featured Listing fees follow the same schedule.</p>
+          <p>All listings are for a 12-month term. Practices that apply during the pre-launch period are eligible for a 50% discount off the standard listing rate. Fees are non-refundable once your listing is confirmed. Featured Listing fees follow the same schedule.</p>
 
           <h2>4. Featured Listing</h2>
           <p>Featured Listing is limited to one provider per city on a first-come, first-served basis. If a Featured Listing slot becomes unavailable after your application, we will contact you to discuss alternative arrangements or a refund of the Featured Listing portion.</p>
@@ -26,8 +26,8 @@ export default function TermsPage() {
           <h2>5. Listing Content</h2>
           <p>You grant TopPhysiatrists.com a non-exclusive license to use your submitted content, photos, and website assets for your listing. We may edit or format your listing for consistency with the directory&apos;s standards.</p>
 
-          <h2>6. Awards and Recognition Event</h2>
-          <p>An active listing makes your practice eligible for the complimentary recognition plaque and an invitation to the Annual Awards &amp; Recognition Event. Event attendance is subject to capacity, scheduling, and logistics, and is not guaranteed.</p>
+          <h2>6. Awards and Recognition Dinner</h2>
+          <p>An active listing makes your practice eligible for an invitation to the Awards &amp; Recognition Dinner and a complimentary recognition plaque. Event attendance is subject to capacity, scheduling, and logistics, and is not guaranteed.</p>
 
           <h2>7. Conduct</h2>
           <p>You agree not to provide false information, misrepresent your credentials or qualifications, or engage in any activity that would violate applicable law or regulation.</p>

@@ -17,7 +17,7 @@ export const faqItems: FaqItem[] = [
   {
     question: "When will my listing go live?",
     answer:
-      "The directory launches in August 2026. All listings debut simultaneously, so every practice that applies now will be live from day one. Practices applying during the pre-launch period receive the balance of 2026 plus all of 2027.",
+      "Listings are typically published within a few business days after approval. During a new directory's pre-launch period, approved listings are held and published when the directory goes live so that all participating practices debut together.",
   },
   {
     question: "What is a Featured Listing?",
@@ -42,7 +42,7 @@ export const faqItems: FaqItem[] = [
   {
     question: "What is the pre-launch special?",
     answer:
-      "Practices that apply before the August 2026 launch receive the balance of 2026 plus all of 2027 — so you're not paying a full year for just a few months. This is the best time to apply and secure your Featured placement before your market fills up.",
+      "Businesses that apply before our August 2026 launch are eligible to receive 50% off all listings. This limited-time offer provides the same recognition, benefits, and visibility at a reduced prelaunch rate.",
   },
   {
     question: "Can I cancel my listing?",
@@ -55,9 +55,9 @@ export const faqItems: FaqItem[] = [
       "Not at all. TopPhysiatrists.com welcomes physiatrists in private practice, academic medical centers, hospital-based practices, and rehabilitation facilities alike. If you provide physiatry or PM&R services, you qualify for a listing.",
   },
   {
-    question: "What is the Annual Awards & Recognition Event?",
+    question: "What is the Awards & Recognition Dinner?",
     answer:
-      "Every listed physician is invited to the Annual TopPhysiatrists.com Awards & Recognition Event in Summer 2027 — an exclusive evening celebrating excellence in physical medicine and rehabilitation. Details will be sent to all listed professionals closer to the event.",
+      "The Awards & Recognition Dinner is an exclusive annual event celebrating the practices featured on TopPhysiatrists.com. It brings together recognized practices, industry professionals, and invited guests to celebrate excellence in patient care. Each listing includes an invitation for your practice, with the event schedule and location announced in advance.",
   },
 ];
 

@@ -65,34 +65,6 @@ export default function AboutPage() {
               </FadeIn>
             ))}
           </div>
-
-          <FadeIn>
-            <div className="rounded-2xl border border-sky-dark bg-sky px-8 py-10 text-center">
-              <h2 className="font-display text-2xl font-bold text-navy mb-3">
-                Full team and company details coming soon.
-              </h2>
-              <p className="text-muted text-base leading-relaxed mb-8 max-w-xl mx-auto">
-                We are focused on building the best physiatry directory in the country. In the meantime, learn about how the listing process works.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <Button href="/how-it-works" variant="secondary" size="lg">
-                  How It Works
-                </Button>
-                <Button href="/apply" variant="primary" size="lg">
-                  Apply to be Listed
-                </Button>
-                <a
-                  href="tel:+18664507014"
-                  className="inline-flex items-center gap-2 rounded-xl border border-navy/20 bg-white px-6 py-3 text-base font-semibold text-navy hover:border-teal/40 hover:text-teal transition-colors"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 8V5z" />
-                  </svg>
-                  (866) 450-7014
-                </a>
-              </div>
-            </div>
-          </FadeIn>
         </div>
       </Container>
     </div>

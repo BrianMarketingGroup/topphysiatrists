@@ -16,7 +16,7 @@ const steps = [
     num: "01",
     title: "Tell Us About Your Practice",
     description:
-      "Tell us about your physiatry practice, the PM&R specialties you offer, and the cities you serve. The profile submission takes about 5 minutes and includes a transparent pricing estimate.",
+      "Tell us about your physiatry practice, the PM&R specialties you offer, and the cities you serve. The profile submission takes about 5 minutes and includes transparent pricing.",
   },
   {
     num: "02",
@@ -30,12 +30,6 @@ const steps = [
     description:
       "Your listing debuts in August 2026 alongside all listed physicians — a coordinated national launch with patient and referring physician awareness campaigns.",
   },
-  {
-    num: "04",
-    title: "Be Recognized",
-    description:
-      "Display the TopPhysiatrists.com 2027 verified badge on your website and receive your complimentary recognition plaque and invitation to the Annual Awards & Recognition Event in Summer 2027.",
-  },
 ];
 
 export default function HowItWorksPage() {
@@ -47,7 +41,7 @@ export default function HowItWorksPage() {
           <p className="text-xs font-semibold text-teal uppercase tracking-widest mb-3">The Process</p>
           <h1 className="font-display text-3xl sm:text-4xl font-bold text-white mb-3">How It Works</h1>
           <p className="text-white/70 text-lg max-w-lg leading-relaxed mx-auto">
-            Four steps from submission to recognition. The process is simple — we handle the rest.
+            Three steps from submission to launch. The process is simple — we handle the rest.
           </p>
         </Container>
       </div>
@@ -107,8 +101,6 @@ export default function HowItWorksPage() {
                   <ul className="space-y-1.5">
                     {[
                       "Full physician profile with photo & description",
-                      "Custom recognition plaque",
-                      "Invitation to the Awards & Recognition Event",
                       "TopPhysiatrists.com verified badge for your website",
                       "Full listing in every city you serve",
                       "Expands your reach to patients and referring physicians in your market",

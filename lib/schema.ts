@@ -26,7 +26,6 @@ export const applySchema = z.object({
     .min(1, "Add at least one city"),
   services: z
     .array(z.string())
-    .min(1, "Select at least one specialty")
     .refine(
       (items) => items.every((p) => allServiceLabels.includes(p)),
       "Invalid specialty"
