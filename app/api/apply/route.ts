@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { applySchema, contactSchema } from "@/lib/schema";
 import { appendLead, appendContact } from "@/lib/sheets";
 import { sendLeadEmail, sendContactEmail } from "@/lib/email";
+import { sendApplyToBff, sendContactToBff } from "@/lib/bff";
 import { clearCache } from "@/lib/availabilityCache";
 
 const RATE_LIMIT_WINDOW = 60_000;
@@ -59,6 +60,11 @@ export async function POST(req: NextRequest) {
     if (data._honeypot) {
       return NextResponse.json({ ok: true });
     }
+    try {
+      await sendContactToBff(data, meta);
+    } catch (e) {
+      console.error("[bff] contact submission failed:", e);
+    }
     await Promise.allSettled([
       appendContact(data, meta),
       sendContactEmail(data, meta),
@@ -77,6 +83,11 @@ export async function POST(req: NextRequest) {
     const data = result.data;
     if (data._honeypot) {
       return NextResponse.json({ ok: true });
+    }
+    try {
+      await sendApplyToBff(data, meta);
+    } catch (e) {
+      console.error("[bff] apply submission failed:", e);
     }
     await Promise.allSettled([
       appendLead(data, meta),
