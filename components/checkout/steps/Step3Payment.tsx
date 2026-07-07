@@ -5,10 +5,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Lock } from "lucide-react";
 import FadeIn from "@/components/ui/FadeIn";
 import Button from "@/components/ui/Button";
-import { FormField, Input } from "@/components/ui/FormField";
+import { FormField, Input, Select } from "@/components/ui/FormField";
 import OrderSummarySidebar from "@/components/checkout/OrderSummarySidebar";
 import { useCheckoutStore } from "@/lib/store/checkoutStore";
 import { paymentSchema, type PaymentData } from "@/lib/checkoutSchema";
+import { ALL_STATES } from "@/lib/checkoutMarkets";
 import type { SiteConfig } from "@/lib/config";
 
 // Same UI-formatting helpers already proven in the existing chiros-app
@@ -113,6 +114,30 @@ export default function Step3Payment({ config }: { config: SiteConfig }) {
 
             <FormField label="CVV" required error={errors.cvv?.message}>
               <Input inputMode="numeric" maxLength={4} {...register("cvv")} error={errors.cvv?.message} />
+            </FormField>
+
+            <FormField
+              label="Billing Address"
+              required
+              className="sm:col-span-2"
+              error={errors.billingAddress?.message}
+            >
+              <Input {...register("billingAddress")} error={errors.billingAddress?.message} />
+            </FormField>
+
+            <FormField label="Billing City" required error={errors.billingCity?.message}>
+              <Input {...register("billingCity")} error={errors.billingCity?.message} />
+            </FormField>
+
+            <FormField label="Billing State" required error={errors.billingState?.message}>
+              <Select {...register("billingState")} error={errors.billingState?.message}>
+                <option value="">Select…</option>
+                {ALL_STATES.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+              </Select>
             </FormField>
 
             <FormField label="Billing ZIP Code" required error={errors.billingZip?.message}>
