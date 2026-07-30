@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { getMarketById, type SelectedMarket } from "@/lib/checkoutMarkets";
+import { getMarketById, type SelectedMarket } from "@/lib/markets";
 
 export type WizardStep = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -27,6 +27,7 @@ export interface PaymentInfo {
   expiry: string;
   cvv: string;
   billingAddress: string;
+  billingAddress2: string;
   billingCity: string;
   billingState: string;
   billingZip: string;
@@ -127,17 +128,23 @@ interface CheckoutState {
   listingInfo: ListingInfo;
   uploadedFiles: Partial<Record<UploadKind, UploadedFileMeta>>;
 
-  debugSubmissionPayload: unknown | null;
+  // Set once POST /api/deals succeeds (on leaving Step 4). Once non-null, the
+  // deal is saved for real — goBack/goToStep lock out steps 1-4, and Step 5
+  // becomes an update (/update_deals/{dealId}) rather than a create.
+  dealId: number | null;
+
+  // First-touch attribution (referrer + entry URL), captured once on wizard
+  // mount — see CheckoutWizard's captureAttribution() call.
+  trafficSource: string;
+  landingPage: string;
 
   goToStep: (step: WizardStep) => void;
   goNext: () => void;
   goBack: () => void;
+  captureAttribution: () => void;
 
   addMarket: (marketId: string) => void;
   removeMarket: (marketId: string) => void;
-  // Featured Placement is sold per city here (featuredScope: "city" — see
-  // lib/config.ts), so this is a single toggle per market, not a
-  // per-specialty/coverage-area set like the topinsuranceagents pattern.
   toggleMarketFeatured: (marketId: string) => void;
   toggleSpecialty: (id: string) => void;
 
@@ -152,7 +159,7 @@ interface CheckoutState {
   setListingInfo: (patch: Partial<ListingInfo>) => void;
   setUploadedFile: (kind: UploadKind, meta: UploadedFileMeta | null) => void;
 
-  setDebugSubmissionPayload: (payload: unknown) => void;
+  setDealId: (id: number | null) => void;
 
   reset: () => void;
 }
@@ -168,6 +175,9 @@ type PersistedCheckoutState = Pick<
   | "selectedUpsellIds"
   | "listingChoice"
   | "listingInfo"
+  | "dealId"
+  | "trafficSource"
+  | "landingPage"
 >;
 
 const initialContact: ContactInfo = {
@@ -186,6 +196,7 @@ const initialPayment: PaymentInfo = {
   expiry: "",
   cvv: "",
   billingAddress: "",
+  billingAddress2: "",
   billingCity: "",
   billingState: "",
   billingZip: "",
@@ -211,10 +222,15 @@ export const useCheckoutStore = create<CheckoutState>()(
       listingInfo: defaultListingInfo(),
       uploadedFiles: {},
 
-      debugSubmissionPayload: null,
+      dealId: null,
+
+      trafficSource: "",
+      landingPage: "",
 
       goToStep: (step) => {
-        if (step <= get().furthestStep) set({ step });
+        const { furthestStep, dealId } = get();
+        if (dealId !== null && step < 5) return; // deal saved — no returning to 1-4
+        if (step <= furthestStep) set({ step });
       },
       goNext: () =>
         set((state) => {
@@ -222,7 +238,20 @@ export const useCheckoutStore = create<CheckoutState>()(
           return { step: next, furthestStep: Math.max(state.furthestStep, next) as WizardStep };
         }),
       goBack: () =>
-        set((state) => ({ step: Math.max(state.step - 1, 1) as WizardStep })),
+        set((state) => {
+          if (state.dealId !== null) return state; // deal saved — no returning to 1-4
+          return { step: Math.max(state.step - 1, 1) as WizardStep };
+        }),
+      captureAttribution: () =>
+        set((state) => {
+          // First-touch only — never overwrite once set (e.g. on remount).
+          if (state.trafficSource || state.landingPage) return state;
+          if (typeof window === "undefined") return state;
+          return {
+            trafficSource: document.referrer || "direct",
+            landingPage: window.location.href,
+          };
+        }),
 
       addMarket: (marketId) =>
         set((state) => {
@@ -237,7 +266,7 @@ export const useCheckoutStore = create<CheckoutState>()(
                 city: market.city,
                 state: market.state,
                 // Featured is opted into on the Enhancements step (Step 4),
-                // not pre-selected here.
+                // not pre-selected here — it hasn't been offered yet.
                 featured: false,
               },
             ],
@@ -283,7 +312,7 @@ export const useCheckoutStore = create<CheckoutState>()(
           return { uploadedFiles: next };
         }),
 
-      setDebugSubmissionPayload: (payload) => set({ debugSubmissionPayload: payload }),
+      setDealId: (id) => set({ dealId: id }),
 
       reset: () =>
         set({
@@ -298,7 +327,9 @@ export const useCheckoutStore = create<CheckoutState>()(
           listingChoice: null,
           listingInfo: defaultListingInfo(),
           uploadedFiles: {},
-          debugSubmissionPayload: null,
+          dealId: null,
+          trafficSource: "",
+          landingPage: "",
         }),
     }),
     {
@@ -332,6 +363,9 @@ export const useCheckoutStore = create<CheckoutState>()(
         selectedUpsellIds: state.selectedUpsellIds,
         listingChoice: state.listingChoice,
         listingInfo: state.listingInfo,
+        dealId: state.dealId,
+        trafficSource: state.trafficSource,
+        landingPage: state.landingPage,
       }),
     },
   ),

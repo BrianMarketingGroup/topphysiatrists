@@ -12,14 +12,20 @@ export default function SpecialtySelector({ config }: { config: SiteConfig }) {
   const { specialty } = config;
   if (!specialty) return null;
 
+  // When specialties don't affect price (pricePerOption === 0) hide all pricing
+  // chrome — no "additional $0 each" note and no "+$0"/"Included" per option.
+  const isPaid = specialty.pricePerOption > 0;
+
   return (
     <div>
       <p className="text-sm font-semibold text-primary mb-2">
         {specialty.label}
         {specialty.required && <span className="text-accent-dark ml-1">*</span>}
-        <span className="text-xs font-normal text-muted ml-1">
-          (first one included — additional {formatCurrency(specialty.pricePerOption)} each)
-        </span>
+        {isPaid && (
+          <span className="text-xs font-normal text-muted ml-1">
+            (first one included — additional {formatCurrency(specialty.pricePerOption)} each)
+          </span>
+        )}
       </p>
       <div className="flex flex-wrap gap-2">
         {specialty.options.map((opt) => {
@@ -38,9 +44,11 @@ export default function SpecialtySelector({ config }: { config: SiteConfig }) {
               )}
             >
               {opt.label}
-              <span className={clsx("ml-1.5", isSelected ? "text-accent-dark" : "text-muted")}>
-                {isIncluded ? "Included" : `+${formatCurrency(specialty.pricePerOption)}`}
-              </span>
+              {isPaid && (
+                <span className={clsx("ml-1.5", isSelected ? "text-accent-dark" : "text-muted")}>
+                  {isIncluded ? "Included" : `+${formatCurrency(specialty.pricePerOption)}`}
+                </span>
+              )}
             </button>
           );
         })}
