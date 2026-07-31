@@ -1,9 +1,22 @@
 import { z } from "zod";
 import { physiatristsConfig, type SiteConfig } from "./config";
+import { isValidLuhn } from "./luhn";
 
 const stateSchema = z.string().min(2, "Select a state");
 const zipSchema = z.string().regex(/^\d{5}(-\d{4})?$/, "Enter a valid ZIP code");
 const phoneSchema = z.string().min(10, "Enter a valid phone number");
+
+/** True if "MM/YY" is this month or later (i.e. not yet expired). */
+function isExpiryInFuture(value: string): boolean {
+  const match = value.match(/^(\d{2})\/(\d{2})$/);
+  if (!match) return false;
+  const month = Number(match[1]);
+  const year = 2000 + Number(match[2]);
+  const now = new Date();
+  const currentYear = now.getFullYear();
+  const currentMonth = now.getMonth() + 1;
+  return year > currentYear || (year === currentYear && month >= currentMonth);
+}
 
 // ---------------------------------------------------------------------------
 // Screen 1 — Select Market
@@ -27,7 +40,7 @@ export const marketSelectionSchema = z
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["specialtyIds"],
-        message: "Select at least one service to continue",
+        message: "Select at least one industry to continue",
       });
     }
   });
@@ -35,7 +48,7 @@ export const marketSelectionSchema = z
 export type MarketSelectionData = z.infer<typeof marketSelectionSchema>;
 
 // ---------------------------------------------------------------------------
-// Screen 2 — Contact Information (topphysiatrists always ships a plaque, so
+// Screen 2 — Contact Information (this site always ships a plaque, so
 // unlike the generic mockup there's no "without shipping" branch here)
 // ---------------------------------------------------------------------------
 
@@ -56,7 +69,8 @@ export const contactSchema = z.object({
 export type ContactData = z.infer<typeof contactSchema>;
 
 // ---------------------------------------------------------------------------
-// Screen 3 — Payment (full billing address, matching applySchema/lib/bff.ts)
+// Screen 3 — Payment (extended with full billing address, not just ZIP —
+// this site's applySchema and the payments table both need it)
 // ---------------------------------------------------------------------------
 
 export const paymentSchema = z.object({
@@ -65,25 +79,24 @@ export const paymentSchema = z.object({
     .string()
     .transform((v) => v.replace(/\s/g, ""))
     .pipe(
-      z.string().refine((v) => v.length >= 13 && v.length <= 19, "Enter a valid card number"),
+      z
+        .string()
+        .refine((v) => v.length >= 13 && v.length <= 19, "Enter a valid card number")
+        .refine(isValidLuhn, "Enter a valid card number"),
     ),
-  expiry: z.string().regex(/^(0[1-9]|1[0-2])\/\d{2}$/, "Use MM/YY format"),
+  expiry: z
+    .string()
+    .regex(/^(0[1-9]|1[0-2])\/\d{2}$/, "Use MM/YY format")
+    .refine(isExpiryInFuture, "This card has expired"),
   cvv: z.string().min(3, "Enter a valid security code").max(4),
   billingAddress: z.string().min(5, "Billing address is required"),
+  billingAddress2: z.string().optional(),
   billingCity: z.string().min(2, "Billing city is required"),
   billingState: stateSchema,
   billingZip: zipSchema,
 });
 
 export type PaymentData = z.infer<typeof paymentSchema>;
-
-// ---------------------------------------------------------------------------
-// Screen 4 — Upsells (trivially permissive: any subset of config ids)
-// ---------------------------------------------------------------------------
-
-export const upsellsSchema = z.object({
-  selectedUpsellIds: z.array(z.string()),
-});
 
 // ---------------------------------------------------------------------------
 // Screen 5 — Listing Information (Complete Now vs Complete Later)
@@ -118,7 +131,7 @@ function buildListingInfoNowObjectSchema(config: SiteConfig) {
   const bioMaxChars = config.listingFields.bioMaxChars;
   return z.object({
     listingChoice: z.literal("now"),
-    businessName: z.string().min(2, "Practice/business name is required"),
+    businessName: z.string().min(2, "Business name is required"),
     people: z.string().min(1, `${config.listingFields.peopleLabel} is required`),
     listingPhone: phoneSchema,
     listingEmail: z.string().email("Enter a valid email address"),

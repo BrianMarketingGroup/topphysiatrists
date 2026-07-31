@@ -1,7 +1,14 @@
+// Two key namings kept as aliases so both the new BFF-backed checkout
+// wizard (spotlightCityAdditional) and the site's existing landing pages
+// (basicPerCity/featuredFirstCity/featuredAdditionalCity) resolve without
+// a global rename.
 export const PRICING = {
   basicPerCity: 289,
   featuredFirstCity: 689,
   featuredAdditionalCity: 345, // 50% off $689
+  baseCity: 289,
+  spotlightCity: 689,
+  spotlightCityAdditional: 345,
 } as const;
 
 export interface QuoteInput {

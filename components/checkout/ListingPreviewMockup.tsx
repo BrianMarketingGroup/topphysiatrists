@@ -2,7 +2,7 @@
 
 import { Star, MapPin, Building2 } from "lucide-react";
 import type { UploadedFileMeta } from "@/lib/store/checkoutStore";
-import type { SelectedMarket } from "@/lib/checkoutMarkets";
+import type { SelectedMarket } from "@/lib/markets";
 
 export default function ListingPreviewMockup({
   businessName,
